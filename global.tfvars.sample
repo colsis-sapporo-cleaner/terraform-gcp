@@ -1,0 +1,39 @@
+# common
+project    = "gcp-example" ## gcp上のproject名と一致させる必要があります
+credential = "credentials.json"    ## project内で作成した認証情報のcredentialファイルをこのディレクトリにコピーしてパスを指定します
+region     = "asia-northeast1"     ## 対象リージョン
+zone       = "asia-northeast1-a"   ## 対象ゾーン
+name       = "sample"              ## name
+
+
+# instances
+
+### common
+## インスタンス共通で使うSSHアカウント用のpubkeyをペーストしてください
+ssh_pub = ""
+
+## firewall向けアクセス許可IPリスト
+allow_ips = []
+
+### CMS
+cms_count          = 1                       ## CMSサーバ数
+cms_machine_type   = "custom-2-4096"         ## マシンタイプ CPU:2core RAM:4GB
+cms_osimage        = "centos-cloud/centos-8" ## OS # gcloud compute images list で参照できます
+cms_disk_size      = 20                      ## ディスク容量(GB)
+cms_delete_protect = false                   ## インスタンスの削除保護。削除保護付けるとterraform destroy でも削除できませんので面倒です
+
+### WWW
+www_count          = 2                       ## WEBサーバ数。CMSとWEBが兼用の1台構成の場合は0としてください
+www_machine_type   = "custom-2-4096"
+www_osimage        = "centos-cloud/centos-8"
+www_disk_size      = 20
+www_delete_protect = false
+
+
+# LB && CDN
+enable_ssl = "true"           # SSL利用有無
+domain     = "sample.com"     # SSL証明書ドメイン
+
+
+## DNS
+create_dns_entry = false      # 
